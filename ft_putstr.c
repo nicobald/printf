@@ -6,15 +6,15 @@
 /*   By: nbaldes <nbaldes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:04:48 by nbaldes           #+#    #+#             */
-/*   Updated: 2025/04/18 17:46:13 by nbaldes          ###   ########.fr       */
+/*   Updated: 2025/04/22 14:57:46 by nbaldes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_putstr(char *s, t_printf *env)
+void	ft_putstr(char *s, t_printf *env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s)

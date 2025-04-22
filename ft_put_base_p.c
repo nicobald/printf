@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_put_base_p.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbaldes <nbaldes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 15:58:01 by nbaldes           #+#    #+#             */
-/*   Updated: 2025/04/22 17:23:02 by nbaldes          ###   ########.fr       */
+/*   Created: 2025/04/22 16:30:34 by nbaldes           #+#    #+#             */
+/*   Updated: 2025/04/22 16:56:08 by nbaldes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *str, ...)
+void	ft_put_base_p(t_printf *env, uintptr_t arg)
 {
-	t_printf	env;
-
-	env.count = 0;
-	if (str == NULL)
-		return (-1);
-	va_start(env.args, str);
-	ft_parse(&env, str);
-	va_end(env.args);
-	return (env.count);
+	if (!arg)
+		ft_putstr("(nil)", env);
+	else if (arg)
+	{
+		ft_putstr("0x", env);
+		ft_put_base_ptr(arg, 16, "0123456789abcdef", env);
+	}
 }

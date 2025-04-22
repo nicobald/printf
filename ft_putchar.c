@@ -6,13 +6,13 @@
 /*   By: nbaldes <nbaldes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:03:44 by nbaldes           #+#    #+#             */
-/*   Updated: 2025/04/18 17:17:46 by nbaldes          ###   ########.fr       */
+/*   Updated: 2025/04/22 14:56:52 by nbaldes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_putchar(char c, t_printf *env)
+void	ft_putchar(char c, t_printf *env)
 {
 	env->count += write(1, &c, 1);
 	return ;
