@@ -3,46 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbaldes <nbaldes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: utilisateur <utilisateur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:58:01 by nbaldes           #+#    #+#             */
-/*   Updated: 2025/04/18 16:58:10 by nbaldes          ###   ########.fr       */
+/*   Updated: 2025/04/22 10:39:07 by utilisateur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// void	ft_putchar(char c, t_printf *env)
+// void ft_putchar(char c, t_printf *env)
 // {
 // 	env->count += write(1, &c, 1);
-// 	return ;
+// 	return;
 // }
 
-// void	ft_putstr(char *s, t_printf *env)
+// void ft_putstr(char *s, t_printf *env)
 // {
-// 	int	i;
+// 	int i;
 
 // 	i = 0;
 // 	if (!s)
 // 	{
 // 		env->count += i;
-// 		return ;
+// 		return;
 // 	}
 // 	while (s[i])
 // 	{
 // 		env->count += write(1, &s[i], 1);
 // 		i++;
 // 	}
-// 	return ;
+// 	return;
 // }
-// void	ft_putnbr(int nb, t_printf *env)
+// void ft_putnbr(int nb, t_printf *env)
 // {
-// 	char	c;
+// 	char c;
 
 // 	if (nb == -2147483648)
 // 	{
 // 		env->count += write(1, "-2147483648", 11);
-// 		return ;
+// 		return;
 // 	}
 // 	if (nb < 0)
 // 	{
@@ -56,9 +56,9 @@
 // 	c = nb % 10 + '0';
 // 	env->count += write(1, &c, 1);
 // }
-// void	ft_putnbr_unsigned(unsigned int nb, t_printf *env)
+// void ft_putnbr_unsigned(unsigned int nb, t_printf *env)
 // {
-// 	char	c;
+// 	char c;
 
 // 	if (nb > 9)
 // 	{
@@ -68,7 +68,7 @@
 // 	env->count += write(1, &c, 1);
 // }
 
-// void	ft_put_base(long nb, int base, char *str, t_printf *env)
+// void ft_put_base(long nb, int base, char *str, t_printf *env)
 // {
 // 	if (nb < 0)
 // 	{
@@ -76,17 +76,28 @@
 // 		nb = -nb;
 // 	}
 // 	if (nb > base - 1)
-// 	{
 // 		ft_put_base((nb / base), base, str, env);
-// 	}
 // 	env->count += write(1, &str[nb % base], 1);
-// 	return ;
+// 	return;
 // }
 
-// void	ft_parse(t_printf *env, const char *str)
+// void ft_put_base_ptr(uintptr_t nb, int base, char *str, t_printf *env)
 // {
-// 	int	i;
-// 				uintptr_t arg;
+// 	if (nb == (long unsigned int)LONG_MIN)
+// 	{
+// 		write(1, "8000000000000000", 17);
+// 		return;
+// 	}
+// 	if (nb >= (uintptr_t)base)
+// 		ft_put_base_ptr(nb / base, base, str, env);
+// 	env->count += write(1, &str[nb % base], 1);
+// 	return;
+// }
+
+// void ft_parse(t_printf *env, const char *str)
+// {
+// 	int i;
+// 	uintptr_t arg;
 
 // 	i = 0;
 // 	while (str[i])
@@ -107,20 +118,20 @@
 // 				ft_putnbr_unsigned(va_arg(env->args, unsigned int), env);
 // 			else if (str[i + 1] == 'x')
 // 				ft_put_base(va_arg(env->args, unsigned int), 16,
-// 					"0123456789abcdef", env);
+// 							"0123456789abcdef", env);
 // 			else if (str[i + 1] == 'X')
 // 				ft_put_base(va_arg(env->args, unsigned int), 16,
-// 					"0123456789ABCDEF", env);
+// 							"0123456789ABCDEF", env);
 // 			else if (str[i + 1] == 'p')
 // 			{
 // 				arg = (uintptr_t)va_arg(env->args, void *);
-// 				if (!(int)arg)
+// 				if (!arg)
 // 					ft_putstr("(nil)", env);
-// 				else
+// 				else if (arg)
 // 				{
 // 					ft_putstr("0x", env);
-// 					ft_put_base((uintptr_t)va_arg(env->args, void *), 16,
-// 						"0123456789abcdef", env);
+// 					ft_put_base_ptr(arg, 16,
+// 									"0123456789abcdef", env);
 // 				}
 // 			}
 // 			i++;
@@ -130,9 +141,9 @@
 // 		i++;
 // 	}
 // }
-int	ft_printf(const char *str, ...)
+int ft_printf(const char *str, ...)
 {
-	t_printf	env;
+	t_printf env;
 
 	env.count = 0;
 	va_start(env.args, str);
@@ -145,9 +156,9 @@ int	ft_printf(const char *str, ...)
 // 	int local = 42;
 
 // 	printf("%d\n", printf("%x et %X et %p\n", 5869547, 5869547,
-			// (void *)&local));
+// 			(void *)&local));
 // 	printf("%d\n",ft_printf("%x et %X et %p\n", 5869547, 5869547,
-			// (void *)&local));
+// 			(void *)&local));
 // 	return (0);
 
 // size_t tmp;
@@ -156,8 +167,37 @@ int	ft_printf(const char *str, ...)
 // tmp = write(1, &c, 1);
 // cmpt = cmpt + (int)tmp;
 // cmpt += (int)write(1, &c, 1);
-//}
+// }
 // #include <limits.h>
+
+// int main(void)
+// {
+// 	uintptr_t ptr;
+
+// 	ptr = 0;
+// 	printf("");
+// 	ft_printf("");
+// 	printf(" %p %p\n", (void *)LONG_MIN, (void *)LONG_MAX);
+// 	ft_printf(" %p %p\n", (void *)LONG_MIN, (void *)LONG_MAX);
+// 	printf("%p\n", (void *)ptr);
+// 	ft_printf("%p\n", (void *)ptr);
+// 	printf("%p\n", (void *)0);
+// 	ft_printf("%p\n", (void *)0);
+// 	printf("%p\n", (void *)NULL);
+// 	ft_printf("%p\n", (void *)NULL);
+// 	printf("%p\n", (void *)-1);
+// 	ft_printf("%p\n", (void *)-1);
+// 	printf("%p\n", (void *)10000000000000000000UL);
+// 	ft_printf("%p\n", (void *)10000000000000000000UL);
+// 	printf("%x\n", (unsigned int)0);
+// 	ft_printf("%x\n", (unsigned int)0);
+// 	// printf("%x\n", (unsigned int)NULL);
+// 	// ft_printf("%x\n", (unsigned int)NULL);
+// 	printf("%x\n", (unsigned int)-1);
+// 	ft_printf("%x\n", (unsigned int)-1);
+// 	printf("%x\n", (unsigned int)10000000000000000000UL);
+// 	ft_printf("%x\n", (unsigned int)10000000000000000000UL);
+// }
 
 // int	main(void)
 // {

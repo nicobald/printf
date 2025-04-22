@@ -12,6 +12,7 @@ ft_putnbr_unsigned.c \
 ft_putchar.c \
 ft_parse.c \
 ft_printf.c \
+ft_put_base_ptr.c
 
 
 

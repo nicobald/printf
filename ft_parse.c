@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbaldes <nbaldes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: utilisateur <utilisateur@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 15:23:25 by nbaldes           #+#    #+#             */
-/*   Updated: 2025/04/18 16:58:06 by nbaldes          ###   ########.fr       */
+/*   Updated: 2025/04/22 10:37:03 by utilisateur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void	ft_parse(t_printf *env, const char *str)
 			else if (str[i + 1] == 'p')
 			{
 				arg = (uintptr_t)va_arg(env->args, void *);
-				if (!(int)arg)
+				if (!arg)
 					ft_putstr("(nil)", env);
-				else
+				else if (arg)
 				{
 					ft_putstr("0x", env);
-					ft_put_base((uintptr_t)va_arg(env->args, void *), 16,
+					ft_put_base_ptr(arg, 16,
 						"0123456789abcdef", env);
 				}
 			}
